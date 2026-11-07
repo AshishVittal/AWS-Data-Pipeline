@@ -1,4 +1,3 @@
-
 terraform {
   required_providers {
     aws = {
@@ -11,8 +10,15 @@ terraform {
       version = "~> 3.6"
     }
   }
-}
 
+  backend "s3" {
+    bucket       = "aws-data-pipeline-tfstate-965984381610-74cef762"
+    key          = "aws-data-pipeline/terraform.tfstate"
+    region       = "ap-south-1"
+    encrypt      = true
+    use_lockfile = true
+  }
+}
 provider "aws" {
   region = var.aws_region
 }

@@ -1,0 +1,35 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "ListTerraformStateBucket",
+      "Effect": "Allow",
+      "Action": [
+        "s3:ListBucket",
+        "s3:GetBucketLocation"
+      ],
+      "Resource": "arn:aws:s3:::aws-data-pipeline-tfstate-965984381610-74cef762",
+      "Condition": {
+        "StringLike": {
+          "s3:prefix": [
+            "aws-data-pipeline/terraform.tfstate",
+            "aws-data-pipeline/terraform.tfstate.tflock"
+          ]
+        }
+      }
+    },
+    {
+      "Sid": "ManageTerraformStateAndLock",
+      "Effect": "Allow",
+      "Action": [
+        "s3:GetObject",
+        "s3:PutObject",
+        "s3:DeleteObject"
+      ],
+      "Resource": [
+        "arn:aws:s3:::aws-data-pipeline-tfstate-965984381610-74cef762/aws-data-pipeline/terraform.tfstate",
+        "arn:aws:s3:::aws-data-pipeline-tfstate-965984381610-74cef762/aws-data-pipeline/terraform.tfstate.tflock"
+      ]
+    }
+  ]
+}
