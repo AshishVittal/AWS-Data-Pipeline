@@ -1,0 +1,112 @@
+﻿{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "ReadCloudWatchLogs",
+            "Effect": "Allow",
+            "Action": [
+                "logs:DescribeLogGroups",
+                "logs:DescribeResourcePolicies",
+                "logs:ListTagsForResource"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Sid": "ReadIAMRoles",
+            "Effect": "Allow",
+            "Action": [
+                "iam:GetRole",
+                "iam:ListRolePolicies",
+                "iam:GetRolePolicy",
+                "iam:ListAttachedRolePolicies"
+            ],
+            "Resource": [
+                "arn:aws:iam::965984381610:role/aws-data-pipeline-scheduler-role",
+                "arn:aws:iam::965984381610:role/aws-data-pipeline-glue-execution-role"
+            ]
+        },
+        {
+            "Sid": "ReadGlueManagedPolicy",
+            "Effect": "Allow",
+            "Action": [
+                "iam:GetPolicy",
+                "iam:GetPolicyVersion"
+            ],
+            "Resource": "arn:aws:iam::aws:policy/service-role/AWSGlueServiceRole"
+        },
+        {
+            "Sid": "ReadGlueCatalog",
+            "Effect": "Allow",
+            "Action": [
+                "glue:GetDatabase",
+                "glue:GetTable",
+                "glue:GetTags"
+            ],
+            "Resource": [
+                "arn:aws:glue:ap-south-1:965984381610:catalog",
+                "arn:aws:glue:ap-south-1:965984381610:database/aws-data-pipeline_catalog",
+                "arn:aws:glue:ap-south-1:965984381610:table/aws-data-pipeline_catalog/orders_processed"
+            ]
+        },
+        {
+            "Sid": "ReadS3BucketConfiguration",
+            "Effect": "Allow",
+            "Action": [
+                "s3:GetBucketPublicAccessBlock",
+                "s3:GetEncryptionConfiguration",
+                "s3:GetBucketObjectLockConfiguration",
+                "s3:GetBucketTagging",
+                "s3:GetBucketVersioning",
+                "s3:GetBucketOwnershipControls",
+                "s3:GetBucketAcl",
+                "s3:GetBucketPolicy",
+                "s3:GetBucketPolicyStatus",
+                "s3:GetBucketWebsite",
+                "s3:GetBucketLogging",
+                "s3:GetBucketNotification",
+                "s3:GetBucketCors",
+                "s3:GetLifecycleConfiguration",
+                "s3:GetReplicationConfiguration",
+                "s3:GetBucketRequestPayment",
+                "s3:GetAccelerateConfiguration",
+                "s3:GetAnalyticsConfiguration",
+                "s3:GetInventoryConfiguration",
+                "s3:GetMetricsConfiguration",
+                "s3:ListBucket"
+            ],
+            "Resource": [
+                "arn:aws:s3:::aws-data-pipeline-raw-74cef762",
+                "arn:aws:s3:::aws-data-pipeline-processed-74cef762"
+            ]
+        },
+        {
+            "Sid": "ReadEventBridgeRules",
+            "Effect": "Allow",
+            "Action": [
+                "events:DescribeRule",
+                "events:ListTargetsByRule",
+                "events:ListTagsForResource"
+            ],
+            "Resource": "arn:aws:events:ap-south-1:965984381610:rule/*"
+        },
+        {
+            "Sid": "ReadEventBridgeSchedules",
+            "Effect": "Allow",
+            "Action": [
+                "scheduler:GetSchedule"
+            ],
+            "Resource": "arn:aws:scheduler:ap-south-1:965984381610:schedule/*/*"
+        },
+        {
+            "Sid": "ReadGlueJobs",
+            "Effect": "Allow",
+            "Action": [
+                "glue:GetJob",
+                "glue:GetTags"
+            ],
+            "Resource": [
+                "arn:aws:glue:ap-south-1:965984381610:job/aws-data-pipeline-orders-etl"
+            ]
+        }
+    ]
+}
