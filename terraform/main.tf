@@ -162,19 +162,6 @@ resource "aws_iam_role_policy" "glue_execution" {
         Resource = [
           aws_s3_bucket.processed.arn
         ]
-      },
-      {
-        Sid    = "WriteGlueLogs"
-        Effect = "Allow"
-        Action = [
-          "logs:CreateLogGroup",
-          "logs:CreateLogStream",
-          "logs:PutLogEvents",
-          "logs:AssociateKmsKey"
-        ]
-        Resource = [
-          "${aws_s3_bucket.processed.arn}/temp/*"
-        ]
       }
     ]
   })
@@ -331,7 +318,7 @@ resource "aws_scheduler_schedule" "daily_glue" {
   description                  = "Starts the orders ETL Glue job every 24 hours"
   schedule_expression          = "rate(1 day)"
   schedule_expression_timezone = "Asia/Kolkata"
-  state                        = "ENABLED"
+  state                        = "DISABLED"
 
   flexible_time_window {
     mode = "OFF"
